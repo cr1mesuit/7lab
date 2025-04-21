@@ -43,10 +43,16 @@ const ProfileForm = ({ user, onSubmit, onCancel }) => {
                 label="Email"
                 type="email"
                 variant="outlined"
-                {...register("email", { required: "Введите email" })}
-                error={!!errors.email}
-                helperText={errors.email ? errors.email.message : ""}
                 fullWidth
+                {...register("email", {
+                    required: "Введите email",
+                    pattern: {
+                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                        message: "Некорректный email"
+                    }
+                })}
+                error={!!errors.email}
+                helperText={errors.email?.message}
             />
 
             <Box sx={{ display: "flex", gap: 2 }}>
