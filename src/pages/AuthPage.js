@@ -17,7 +17,7 @@ const AuthPage = () => {
     };
 
     const handleRegister = async (data) => {
-        const result = await register(data.name, data.email, data.password);
+        const result = await register(data.username, data.password, data.name, data.email);
         if (!result.success) {
             alert(result.message);
         }

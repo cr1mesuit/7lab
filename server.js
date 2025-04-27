@@ -28,9 +28,8 @@ app.post('/api/login', (req, res) => {
 });
 
 app.post('/api/register', (req, res) => {
-    const { username, password } = req.body;
+    const { username, password, name, email } = req.body;
 
-    // Проверяем, что username уникален
     const userExists = users.some(u => u.username === username);
 
     if (userExists) {
@@ -41,8 +40,8 @@ app.post('/api/register', (req, res) => {
         id: users.length + 1,
         username,
         password,
-        name: '',
-        email: ''
+        name: name || username,
+        email: email || `${username}@example.com`
     };
 
     users.push(newUser);
@@ -56,6 +55,7 @@ app.post('/api/register', (req, res) => {
         }
     });
 });
+
 
 app.put('/api/profile/:id', (req, res) => {
     const { id } = req.params;
